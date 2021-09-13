@@ -16,19 +16,6 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function repeater(str, options) {
-  const supRepeator = (st = '', rep = 1, repStr) =>
-    `${String(st)}${repStr}`.repeat(rep).slice(0, -repStr.length);
-
-  return supRepeator(
-    str +
-      (options?.addition != undefined || options?.additionSeparator != undefined
-        ? supRepeator(
-            options?.addition,
-            options?.additionRepeatTimes,
-            options?.additionSeparator || '|'
-          )
-        : ''),
-    options?.repeatTimes,
-    options?.separator || '+'
-  );
+  throw new NotImplementedError('Not implemented');
+  // remove line with error and write your code here
 }
