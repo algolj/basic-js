@@ -3,7 +3,7 @@ import { NotImplementedError } from '../extensions/index.js';
 /**
  * Given matrix where you have to find cats by ears "^^"
  *
- * @param {Array<Array>} matrix 
+ * @param {Array<Array>} matrix
  * @return {Number} count of cats found
  *
  * @example
@@ -14,7 +14,19 @@ import { NotImplementedError } from '../extensions/index.js';
  * ]) => 3`
  *
  */
-export default function countCats(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+// turn the array into a string
+// backyard.join(',') ===>
+// [[1,2,'^^',],[null,'^^',undefined],['abc','^^']] ~~~> '1,2,^^,,^^,,abc,^^'
+
+// add a comma to account for the likely cat in the first box
+// ',' + backyard.join(',') ===>
+//  ',1,2,^^,,^^,,abc,^^' ~~~> ',1,2,^^,,^^,,abc,^^'
+
+// break the line into boxes with cats
+// (',' + backyard.join(',')).split(',^^') ===>
+// ',1,2,^^,,^^,,abc,^^' ~~~> ['','1,2,', ',', ',abc,']
+
+// get the number of boxes with cats
+export default function countCats(matrix) {
+  return (',' + matrix.join(',')).split(',^^').length - 1;
 }
