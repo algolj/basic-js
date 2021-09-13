@@ -23,7 +23,60 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function minesweeper(matrix) {
+  return matrix.reduce(
+    (minefield, line, i) => {
+      line.forEach((cell, j) => {
+        if (cell) {
+          [
+            [[i - 1], [j - 1]],
+            [[i - 1], [j + 1]],
+            [[i + 1], [j - 1]],
+            [[i + 1], [j + 1]],
+            [[i - 1], [j]],
+            [[i], [j + 1]],
+            [[i + 1], [j]],
+            [[i], [j - 1]],
+          ].forEach((fr) => {
+            if (
+              minefield[fr[0]] != undefined &&
+              minefield[fr[0]][fr[1]] != undefined
+            )
+              minefield[fr[0]][fr[1]]++;
+          });
+        }
+      });
+      return minefield;
+    },
+    Array.from(Array(matrix.length), () => new Array(matrix[0].length).fill(0))
+  );
 }
+
+// My first version, but the rs.school tests don't work with ?.
+/*
+export default function minesweeper(matrix) {
+  return matrix.reduce(
+    (minefield, line, i) => {
+      line.forEach((cell, j) => {
+        if (cell) {
+          [
+            [[i - 1], [j - 1]],
+            [[i - 1], [j + 1]],
+            [[i + 1], [j - 1]],
+            [[i + 1], [j + 1]],
+            [[i - 1], [j]],
+            [[i], [j + 1]],
+            [[i + 1], [j]],
+            [[i], [j - 1]],
+          ].forEach((fr) => {
+            if (minefield?.[fr[0]]?.[fr[1]] != undefined)
+              minefield[fr[0]][fr[1]]++;
+          });
+        }
+      });
+      return minefield;
+    },
+    Array.from(Array(matrix.length), () => new Array(matrix[0].length).fill(0))
+  );
+}
+*/
